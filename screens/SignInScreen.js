@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -39,6 +40,12 @@ export default function SignInScreen({ navigation }) {
       console.log(error.response);
 
       setErrorText(error.response.data.description);
+    }
+  }
+
+  function dismissKeyboard() {
+    if (Platform.OS !== "web") {
+      Keyboard.dismiss();
     }
   }
 
