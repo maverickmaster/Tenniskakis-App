@@ -27,7 +27,7 @@ export default function App() {
 
   return loading ? (
     <View style={styles.container}>
-      <ActivityIndicator />
+      <ActivityIndicator size="large" color="red" />
     </View>
   ) : (
     <NavigationContainer>

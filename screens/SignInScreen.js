@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -74,6 +75,7 @@ export default function SignInScreen({ navigation }) {
         <TouchableOpacity onPress={login} style={styles.loginButton}>
           <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
+        <ActivityIndicator size="large" color="red" />
         <Text style={styles.errorText}>{errorText}</Text>
       </View>
     </TouchableWithoutFeedback>
