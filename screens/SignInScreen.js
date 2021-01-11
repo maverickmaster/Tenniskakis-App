@@ -21,6 +21,7 @@ export default function SignInScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
+  const [loading, setLoading] = useState(true);
 
   async function login() {
     console.log("---- Login time ----");
@@ -75,7 +76,7 @@ export default function SignInScreen({ navigation }) {
         <TouchableOpacity onPress={login} style={styles.loginButton}>
           <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
-        <ActivityIndicator size="large" color="red" />
+        {/* {loading ? <ActivityIndicator size="large" color="red" /> : "Sign In"} */}
         <Text style={styles.errorText}>{errorText}</Text>
       </View>
     </TouchableWithoutFeedback>
