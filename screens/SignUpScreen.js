@@ -30,10 +30,17 @@ export default function SignUpScreen({ navigation }) {
 
     try {
       setLoading(true);
-      await axios.post(API + API_SIGNUP, {
+      const response = await axios.post(API + API_SIGNUP, {
         username,
         password,
       });
+
+      if (response.data.Error === "User already exists") {
+        setErrorText("This user exists");
+        setLoading(false);
+        return;
+      }
+
       console.log("Success signing up!");
       login();
     } catch (error) {
@@ -45,7 +52,7 @@ export default function SignUpScreen({ navigation }) {
   }
 
   async function login() {
-    console.log("---- Login time ----");
+    console.log("---- Login ----");
     Keyboard.dismiss();
 
     try {
@@ -106,6 +113,14 @@ export default function SignUpScreen({ navigation }) {
             <ActivityIndicator size="large" color="red" /> //adjust
           ) : null}
         </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("SignIn");
+          }}
+          style={styles.switchButton}
+        >
+          <Text style={styles.switchText}>Sign In</Text>
+        </TouchableOpacity>
         <Text style={styles.errorText}>{errorText}</Text>
         <View style={{ height: 20, alignItems: "left" }}></View>
       </View>
@@ -153,5 +168,8 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     height: 40,
+  },
+  switchText: {
+    color: "blue",
   },
 });
