@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { useAuth } from "../hooks/useAPI";
 
 const API = "https://milton488.pythonanywhere.com";
 const API_LOGIN = "/auth";
@@ -21,66 +22,73 @@ const API_SIGNUP = "/newuser";
 export default function SignInSignUpView({ navigation, isSignIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorText, setErrorText] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [login, signup, loading, errorText] = useAuth(
+    username,
+    password,
+    () => {
+      navigation.navigate("TabStack"); // function to be run on successful login
 
-  async function signup() {
-    console.log("---- Signing up ----");
-    Keyboard.dismiss();
+      // const [errorText, setErrorText] = useState("");
+      // const [loading, setLoading] = useState(false);
 
-    try {
-      setLoading(true);
-      const response = await axios.post(API + API_SIGNUP, {
-        username,
-        password,
-      });
+      // async function signup() {
+      //   console.log("---- Signing up ----");
+      //   Keyboard.dismiss();
 
-      if (response.data.Error === "User already exists") {
-        setErrorText("This user exists");
-        setLoading(false);
-        return;
-      }
+      //   try {
+      //     setLoading(true);
+      //     const response = await axios.post(API + API_SIGNUP, {
+      //       username,
+      //       password,
+      //     });
 
-      console.log("Success signing up!");
-      login();
-    } catch (error) {
-      setLoading(false);
-      console.log("Error signing up!");
-      console.log(error.response);
-      setErrorText(error.response.data.description);
+      //     if (response.data.Error === "User already exists") {
+      //       setErrorText("This user exists");
+      //       setLoading(false);
+      //       return;
+      //     }
+
+      //     console.log("Success signing up!");
+      //     login();
+      //   } catch (error) {
+      //     setLoading(false);
+      //     console.log("Error signing up!");
+      //     console.log(error.response);
+      //     setErrorText(error.response.data.description);
     }
-  }
+  );
+  // }
 
-  async function login() {
-    console.log("---- Login ----");
-    Keyboard.dismiss();
+  // async function login() {
+  //   console.log("---- Login ----");
+  //   Keyboard.dismiss();
 
-    try {
-      setLoading(true);
-      const response = await axios.post(API + API_LOGIN, {
-        username,
-        password,
-      });
-      console.log("Success logging in!");
-      console.log(response);
+  //   try {
+  //     setLoading(true);
+  //     const response = await axios.post(API + API_LOGIN, {
+  //       username,
+  //       password,
+  //     });
+  //     console.log("Success logging in!");
+  //     console.log(response);
 
-      await AsyncStorage.setItem("token", response.data.access_token);
-      setLoading(false);
-      navigation.navigate("Account");
-    } catch (error) {
-      setLoading(false);
-      console.log("Error logging in!");
-      console.log(error.response);
+  //     await AsyncStorage.setItem("token", response.data.access_token);
+  //     setLoading(false);
+  //     navigation.navigate("Account");
+  //   } catch (error) {
+  //     setLoading(false);
+  //     console.log("Error logging in!");
+  //     console.log(error.response);
 
-      setErrorText(error.response.data.description);
-    }
-  }
+  //     setErrorText(error.response.data.description);
+  //   }
+  // }
 
-  function dismissKeyboard() {
-    if (Platform.OS !== "web") {
-      Keyboard.dismiss();
-    }
-  }
+  // function dismissKeyboard() {
+  //   if (Platform.OS !== "web") {
+  //     Keyboard.dismiss();
+  //   }
+  // }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
