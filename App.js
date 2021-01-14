@@ -36,7 +36,7 @@ export default function App() {
       <Stack.Navigator
         mode="modal"
         headerMode="none"
-        // initialRouteName={signedIn ? "Account" : "SignIn"}
+        initialRouteName={signedIn ? "TabStack" : "SignIn"}
         screenOptions={{ animationEnabled: false }}
       >
         {/* <Stack.Screen component={AccountScreen} name="Account" /> */}
