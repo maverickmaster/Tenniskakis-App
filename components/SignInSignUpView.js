@@ -14,6 +14,9 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useAuth } from "../hooks/useAPI";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { signInAction } from "../redux/ducks/blogAuth";
 
 const API = "https://milton488.pythonanywhere.com";
 const API_LOGIN = "/auth";
@@ -22,11 +25,15 @@ const API_SIGNUP = "/newuser";
 export default function SignInSignUpView({ navigation, isSignIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const [login, signup, loading, errorText] = useAuth(
     username,
     password,
     () => {
-      navigation.navigate("TabStack"); // function to be run on successful login
+      // setTimeout(() => {
+      dispatch(signInAction());
+      // }, 500);
+      // navigation.navigate("TabStack"); // function to be run on successful login
 
       // const [errorText, setErrorText] = useState("");
       // const [loading, setLoading] = useState(false);

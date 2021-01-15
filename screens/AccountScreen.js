@@ -9,8 +9,11 @@ import {
 import { commonStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUsername } from "../hooks/useAPI";
+import { useDispatch } from "react-redux";
+import { signOutAction } from "../redux/ducks/blogAuth";
 
 export default function AccountScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [username, loading, error, refresh] = useUsername();
 
   // signs out if the useUsername hook returns error as true
@@ -30,7 +33,7 @@ export default function AccountScreen({ navigation }) {
 
   function signOut() {
     AsyncStorage.removeItem("token");
-    navigation.navigate("SignIn");
+    dispatch(signOutAction());
   }
 
   return (
