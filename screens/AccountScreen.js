@@ -47,14 +47,14 @@ export default function AccountScreen({ navigation }) {
         isDarkModeOn && { backgroundColor: "black" },
       ]}
     >
-      <Text style={styles.titleText}>Account Screen</Text>
+      <Text style={isDarkModeOn && { color: "white" }}>Account Screen</Text>
       {loading ? (
         <ActivityIndicator />
       ) : (
         <Text style={styles.usernameText}>{username}</Text>
       )}
       <View style={styles.horizontalBlock}>
-        <Text>Dark mode</Text>
+        <Text style={isDarkModeOn && { color: "white" }}>Dark mode</Text>
         <Switch
           value={isDarkModeOn}
           onValueChange={() => dispatch(toggleDarkMode())}
