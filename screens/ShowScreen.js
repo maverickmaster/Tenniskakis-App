@@ -40,7 +40,7 @@ export default function ShowScreen({ navigation, route }) {
     });
   }, []);
 
-  // Retrive posts by ID from DB
+  // Retrive posts
   async function retrivePost(recID) {
     console.log("--- Post retriving --- ");
 

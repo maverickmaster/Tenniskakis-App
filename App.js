@@ -25,7 +25,7 @@ export default function AppWrapper() {
 
 function App() {
   const [loading, setLoading] = useState(true);
-  // const [signedIn, setSignedIn] = useState(false);
+
   const dispatch = useDispatch();
   const signedIn = useSelector((state) => state.auth.signedIn); // before: [] = useState()
 
@@ -46,12 +46,6 @@ function App() {
     loadToken();
   }, []);
 
-  // return loading ? (
-  //   <View style={styles.container}>
-  //     <ActivityIndicator size="large" color="red" />
-  //   </View>
-  // ) : (
-
   if (loading) {
     return (
       <View style={styles.container}>
@@ -62,17 +56,6 @@ function App() {
 
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator
-        mode="modal"
-        headerMode="none"
-        initialRouteName={signedIn ? "TabStack" : "SignIn"}
-        screenOptions={{ animationEnabled: false }} */}
-      {/* > */}
-      {/* <Stack.Screen component={AccountScreen} name="Account" /> */}
-      {/* <Stack.Screen component={SignInScreen} name="SignIn" />
-        <Stack.Screen component={SignUpScreen} name="SignUp" />
-        <Stack.Screen component={TabStack} name="TabStack" />
-      </Stack.Navigator> */}
       {signedIn ? (
         <TabStack />
       ) : (
