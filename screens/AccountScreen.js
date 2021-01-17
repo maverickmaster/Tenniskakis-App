@@ -18,7 +18,8 @@ export default function AccountScreen({ navigation }) {
   const dispatch = useDispatch();
   const [username, loading, error, refresh] = useUsername();
   const isDarkModeOn = useSelector((state) => state.prefs.darkMode);
-  // const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+  //const [isEnabled, setIsEnabled] = useState(false);
 
   // signs out if the useUsername hook returns error as true
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function AccountScreen({ navigation }) {
 
   function signOut() {
     AsyncStorage.removeItem("token");
+
     dispatch(signOutAction());
   }
 
@@ -64,8 +66,7 @@ export default function AccountScreen({ navigation }) {
         />
       </View>
       <Text> {isDarkModeOn ? "DARK MODE ON" : "DARK MODE OFF"}</Text>
-      {/* <Text>Account Screen</Text>
-      {loading ? <ActivityIndicator /> : <Text>{username}</Text>} */}
+
       <Button title="Sign out" onPress={signOut} />
     </View>
   );

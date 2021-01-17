@@ -1,3 +1,5 @@
+import { CommonActions } from "@react-navigation/native";
+
 const SIGN_IN = "sign_in";
 const SIGN_OUT = "sign_out";
 
@@ -18,7 +20,7 @@ export default function blogAuthReducer(state = initialState, action) {
     case SIGN_IN:
       return { ...state, signedIn: true };
     case SIGN_OUT:
-      return { ...state, signedIn: false };
+      return CommonActions.reset({ ...state, signedIn: false });
     default:
       return state;
   }

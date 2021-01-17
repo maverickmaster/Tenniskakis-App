@@ -11,6 +11,7 @@ import TabStack from "./components/TabStack";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./redux/createStore";
 import { signInAction } from "./redux/ducks/blogAuth";
+import { commonStyles } from "./styles/commonStyles";
 
 const Stack = createStackNavigator();
 

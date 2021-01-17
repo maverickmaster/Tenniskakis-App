@@ -2,10 +2,17 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const API = "https://milton488.pythonanywhere.com";
+// const API = "https://milton488.pythonanywhere.com";
 const API_WHOAMI = "/whoami";
 const API_LOGIN = "/auth";
 const API_SIGNUP = "/newuser";
+
+export const API = "https://milton488.pythonanywhere.com";
+export const API_ALL_POSTS = "/posts"; // GET
+export const API_DELETE_POST_ID = "/posts/"; // DELETE
+export const API_CREATE_POST = "/create"; // POST
+export const API_POST_ID = "/posts/"; // GET
+export const API_EDIT_POST_ID = "/posts/"; // PUT
 
 export function useUsername() {
   const [username, setUsername] = useState("");
