@@ -55,7 +55,7 @@ export default function CreateScreen({ navigation }) {
     // Create post
     createPost(recTitle, recContent);
 
-    return navigation.navigate("Index", { title, content, action: "create" });
+    navigation.navigate("Index", { title, content, action: "create" });
   }
 
   // Cancel button pressed

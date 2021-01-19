@@ -14,8 +14,9 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
 import { API, API_ALL_POSTS, API_DELETE_POST_ID } from "../hooks/useAPI";
 import { Card, CardItem, Body } from "native-base";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-var namesAsObjects = [];
+var data = [];
 
 export default function IndexScreen({ navigation, route }) {
   const isDarkModeOn = useSelector((state) => state.prefs.darkMode);
@@ -61,19 +62,22 @@ export default function IndexScreen({ navigation, route }) {
 
     try {
       setLoading(true);
-      const response = await axios.get(API + API_ALL_POSTS);
-      // setup name object for flatlist
-      namesAsObjects = response.data.map((item) => {
-        return {
-          name: item,
-        };
+      const token = await AsyncStorage.getItem("token");
+      //  Send authorization header
+      const response = await axios.get(API + API_ALL_POSTS, {
+        headers: { Authorization: `JWT ${token}` },
       });
+
+      data = response.data;
       console.log("Posts retrive successful!");
       // trigger flatlist refresh
       setRefresh(!refresh);
     } catch (error) {
       console.log("Error retriving posts!");
-      //      console.log(error.response.data.error);
+      console.log(error);
+      if (error.response) {
+        console.log(error.response);
+      }
     } finally {
       setLoading(false);
     }
@@ -105,7 +109,7 @@ export default function IndexScreen({ navigation, route }) {
     } catch (error) {
       console.log("Error deleting post!");
       console.log(error.response.data.error);
-      //      setErrorMessage(error.response.data.error);
+      // setErrorMessage(error.response.data.error);
     } finally {
       setLoading(false);
     }
@@ -120,6 +124,7 @@ export default function IndexScreen({ navigation, route }) {
   }
 
   // The function to render each row in our FlatList
+  // change all item.name to item
   function renderPost({ item }) {
     return (
       <Card style={styles.card}>
@@ -133,22 +138,22 @@ export default function IndexScreen({ navigation, route }) {
                 marginRight: 20,
               }}
             >
-              <TouchableOpacity onPress={() => deletePressed(item.name.id)}>
+              <TouchableOpacity onPress={() => deletePressed(item.id)}>
                 <MaterialIcons name="highlight-remove" size={40} color="red" />
               </TouchableOpacity>
             </View>
             <View style={{ width: "80%", flexDirection: "column" }}>
-              <TouchableOpacity onPress={() => showPressed(item.name.id)}>
-                <Text style={styles.renderViewText}>{item.name.title}</Text>
+              <TouchableOpacity onPress={() => showPressed(item.id)}>
+                <Text style={styles.renderViewText}>{item.title}</Text>
                 <Text style={{ color: "white" }} numberOfLines={1}>
-                  {item.name.content}
+                  {item.content}
                 </Text>
               </TouchableOpacity>
             </View>
             <View
               style={{ width: "10%", alignItems: "center", marginRight: 30 }}
             >
-              <TouchableOpacity onPress={() => showPressed(item.name.id)}>
+              <TouchableOpacity onPress={() => showPressed(item.id)}>
                 <MaterialIcons
                   name="arrow-forward-ios"
                   size={24}
@@ -181,10 +186,11 @@ export default function IndexScreen({ navigation, route }) {
       <Text style={isDarkModeOn && { color: "white" }}>Index Screens</Text>
       <View style={styles.container}>
         <FlatList
-          data={namesAsObjects}
+          data={data}
           renderItem={renderPost}
           style={{ width: "100%" }}
           keyExtractor={(item) => item.id.toString()}
+          extraData={refresh}
         />
         <Text style={styles.errorText}>{errorMessage}</Text>
       </View>
@@ -198,6 +204,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightblue",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%", // give the container full width
   },
 });
 
