@@ -207,5 +207,3 @@ const styles = StyleSheet.create({
     width: "100%", // give the container full width
   },
 });
-
-// const styles = StyleSheet.create({});
