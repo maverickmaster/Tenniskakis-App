@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-// const API = "https://milton488.pythonanywhere.com";
 const API_WHOAMI = "/whoami";
 const API_LOGIN = "/auth";
 const API_SIGNUP = "/newuser";
@@ -59,6 +58,9 @@ export function useAuth(username, password, navigationCallback) {
       setLoading(true);
       const response = await axios.post(API + API_LOGIN, {
         username,
+        // age, //add 1
+        // career,
+        // email,
         password,
       });
       console.log("Success signing in!");
@@ -80,6 +82,9 @@ export function useAuth(username, password, navigationCallback) {
       setLoading(true);
       await axios.post(API + API_SIGNUP, {
         username,
+        // age, // add2
+        // career,
+        // email,
         password,
       });
       if (response.data.Error === "User already exists") {

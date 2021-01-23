@@ -11,10 +11,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Card, CardItem, Body } from "native-base";
 import axios from "axios";
 import { API, API_POST_ID } from "../hooks/useAPI";
+import { DarkTheme } from "@react-navigation/native";
 
 export default function ShowScreen({ navigation, route }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [age, setAge] = useState("");
+  const [career, setCareer] = useState("");
+  const [email, setEmail] = useState("");
+
   const [id, setID] = useState(route.params.id);
   const [loading, setLoading] = useState(false);
 
@@ -49,8 +54,16 @@ export default function ShowScreen({ navigation, route }) {
       const response = await axios.get(API + API_POST_ID + recID);
       console.log("Title: " + response.data.title);
       console.log("Content: " + response.data.content);
+      console.log("Age: " + response.data.age);
+      console.log("Career: " + response.data.career);
+      console.log("Email: " + response.data.email);
+
       setTitle(response.data.title);
       setContent(response.data.content);
+      setAge(response.data.age);
+      setCareer(response.data.career);
+      setEmail(response.data.email);
+
       console.log("Post retrive successful!");
     } catch (error) {
       console.log("Error retriving post!");
@@ -75,6 +88,9 @@ export default function ShowScreen({ navigation, route }) {
           <Body>
             <Text style={styles.cardTitle}>{title}</Text>
             <Text>{content}</Text>
+            <Text>{age}</Text>
+            <Text>{career}</Text>
+            <Text>{email}</Text>
           </Body>
         </CardItem>
       </Card>

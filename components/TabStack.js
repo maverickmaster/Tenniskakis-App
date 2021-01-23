@@ -42,12 +42,12 @@ export default function TabStack() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Blog") {
+          if (route.name === "DATE Posts") {
+            iconName = focused ? "ios-list-circle" : "ios-list";
+          } else if (route.name === "Account") {
             iconName = focused
               ? "ios-information-circle"
               : "ios-information-circle-outline";
-          } else if (route.name === "Account") {
-            iconName = focused ? "ios-list-box" : "ios-list";
           }
 
           // You can return any component that you like here!
@@ -59,7 +59,7 @@ export default function TabStack() {
         inactiveTintColor: "gray",
       }}
     >
-      <Tab.Screen name="Blog" component={BlogStack} />
+      <Tab.Screen name="DATE Posts" component={BlogStack} />
       <Tab.Screen name="Account" component={AccountScreen} />
     </Tab.Navigator>
   );

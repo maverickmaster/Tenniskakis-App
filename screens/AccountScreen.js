@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Switch,
+  Image,
 } from "react-native";
 import { commonStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -49,7 +50,9 @@ export default function AccountScreen({ navigation }) {
         isDarkModeOn && { backgroundColor: "black" },
       ]}
     >
-      <Text style={isDarkModeOn && { color: "white" }}>Account Screen</Text>
+      <Text style={[styles.titleText, isDarkModeOn && { color: "white" }]}>
+        Member Account Screen
+      </Text>
       {loading ? (
         <ActivityIndicator />
       ) : (
@@ -68,24 +71,31 @@ export default function AccountScreen({ navigation }) {
       <Text> {isDarkModeOn ? "DARK MODE ON" : "DARK MODE OFF"}</Text>
 
       <Button title="Sign out" onPress={signOut} />
+      <Image
+        source={require("../assets/dateme.jpg")}
+        style={{ height: 160, width: 160, marginTop: 15, borderRadius: 15 }}
+      />
     </View>
   );
 }
 const styles = StyleSheet.create({
   titleText: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 24,
+    color: "brown",
+    marginBottom: 88,
   },
   usernameText: {
-    fontSize: 18,
+    fontSize: 48,
+    fontWeight: "bold",
     color: "grey",
     marginBottom: 12,
   },
   horizontalBlock: {
     alignItems: "center",
+    alignContent: "center",
     justifyContent: "space-between",
-    width: "40%",
+    width: "35%",
     flexDirection: "row",
   },
 });

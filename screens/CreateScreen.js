@@ -16,11 +16,15 @@ import { API, API_CREATE_POST } from "../hooks/useAPI";
 export default function CreateScreen({ navigation }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [age, setAge] = useState("");
+  const [career, setCareer] = useState("");
+  const [email, setEmail] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   // Create posts to DB
-  async function createPost(title, content) {
+  async function createPost(title, content, age, career, email) {
     console.log("--- Post creating ---");
 
     try {
@@ -28,6 +32,9 @@ export default function CreateScreen({ navigation }) {
       const response = await axios.post(API + API_CREATE_POST, {
         title,
         content,
+        age,
+        career,
+        email,
       });
       console.log("Post create successful!");
       console.log("response.data:");
@@ -41,21 +48,44 @@ export default function CreateScreen({ navigation }) {
   }
 
   // Create button pressed
-  function createPressed(recTitle, recContent) {
-    // Error check if title entered
+  function createPressed(recTitle, recContent, recAge, recCareer, recEmail) {
+    // Error check if Name entered
     if (recTitle == "") {
-      setErrorMessage("Please enter title.");
+      setErrorMessage("Please enter Name.");
       return;
     }
-    // Error check if content entered
+    // Error check if Date entered
     if (recContent == "") {
-      setErrorMessage("Please enter content.");
+      setErrorMessage("Please enter an available date.");
       return;
     }
-    // Create post
-    createPost(recTitle, recContent);
+    // Error check if Age entered
+    if (recAge == "") {
+      setErrorMessage("Please enter your Age.");
+      return;
+    }
+    // Error check if Career entered
+    if (recCareer == "") {
+      setErrorMessage("Please enter your Career.");
+      return;
+    }
+    // Error check if Email entered
+    if (recEmail == "") {
+      setErrorMessage("Please enter your Email.");
+      return;
+    }
 
-    navigation.navigate("Index", { title, content, action: "create" });
+    // Create post
+    createPost(recTitle, recContent, recAge, recCareer, recEmail);
+
+    navigation.navigate("Index", {
+      title,
+      content,
+      age,
+      career,
+      email,
+      action: "create",
+    });
   }
 
   // Cancel button pressed
@@ -66,25 +96,54 @@ export default function CreateScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={commonStyles.container}>
-        <Text style={styles.textLabel}>Add Blog</Text>
-        <Text style={styles.textLabel2}>Title</Text>
+        <Text style={styles.textLabel}>Date Available</Text>
+        <Text style={styles.textLabel2}>Name</Text>
         <TextInput
-          placeholder="Enter title..."
+          placeholder="Enter Name..."
           style={styles.textInput}
           value={title}
           onChangeText={(input) => setTitle(input)}
           onTextInput={() => setErrorMessage("")}
           autoCorrect={false}
         ></TextInput>
-        <Text style={styles.textLabel2}>Content</Text>
+        <Text style={styles.textLabel2}>Date</Text>
         <TextInput
-          placeholder="Enter content..."
+          placeholder="Enter available date..."
           style={styles.textInput}
           value={content}
           onChangeText={(input) => setContent(input)}
           onTextInput={() => setErrorMessage("")}
           autoCorrect={false}
         ></TextInput>
+
+        <Text style={styles.textLabel2}>Age</Text>
+        <TextInput
+          placeholder="Enter Age..."
+          style={styles.textInput}
+          value={age}
+          onChangeText={(input) => setAge(input)}
+          onTextInput={() => setErrorMessage("")}
+          autoCorrect={false}
+        ></TextInput>
+        <Text style={styles.textLabel2}>Career</Text>
+        <TextInput
+          placeholder="Enter current Career..."
+          style={styles.textInput}
+          value={career}
+          onChangeText={(input) => setCareer(input)}
+          onTextInput={() => setErrorMessage("")}
+          autoCorrect={false}
+        ></TextInput>
+        <Text style={styles.textLabel2}>Email</Text>
+        <TextInput
+          placeholder="Enter contect Email..."
+          style={styles.textInput}
+          value={email}
+          onChangeText={(input) => setEmail(input)}
+          onTextInput={() => setErrorMessage("")}
+          autoCorrect={false}
+        ></TextInput>
+
         <View
           style={{
             flexDirection: "row",
@@ -100,7 +159,7 @@ export default function CreateScreen({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, styles.buttonSubmit, { marginLeft: 10 }]}
-            onPress={() => createPressed(title, content)}
+            onPress={() => createPressed(title, content, age, career, email)}
           >
             <Text style={styles.buttonText}>
               {loading ? (

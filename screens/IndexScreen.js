@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  Image,
   ActivityIndicator,
 } from "react-native";
 import { commonStyles } from "../styles/commonStyles";
@@ -54,7 +55,13 @@ export default function IndexScreen({ navigation, route }) {
     }
     // Retrive all posts from DB and refresh flatlist
     retrivePosts();
-  }, [route.params?.title, route.params?.content]);
+  }, [
+    route.params?.title,
+    route.params?.content,
+    route.params?.age,
+    route.params?.career,
+    route.params?.email,
+  ]);
 
   // this retrive posts from DB and refresh flatlist
   async function retrivePosts() {
@@ -148,6 +155,16 @@ export default function IndexScreen({ navigation, route }) {
                 <Text style={{ color: "white" }} numberOfLines={1}>
                   {item.content}
                 </Text>
+
+                <Text style={{ color: "white" }} numberOfLines={1}>
+                  {item.age}
+                </Text>
+                <Text style={{ color: "white" }} numberOfLines={1}>
+                  {item.career}
+                </Text>
+                <Text style={{ color: "white" }} numberOfLines={1}>
+                  {item.email}
+                </Text>
               </TouchableOpacity>
             </View>
             <View
@@ -170,7 +187,13 @@ export default function IndexScreen({ navigation, route }) {
   // This will clear the whole screen and replace with a spinner
   if (loading) {
     return (
-      <View style={commonStyles.container}>
+      <View
+        style={[
+          commonStyles.container,
+          isDarkModeOn && { backgroundColor: "black" },
+        ]}
+      >
+        {/* <View style={commonStyles.container}> */}
         <ActivityIndicator size="large" color="red" />
       </View>
     );
@@ -183,7 +206,9 @@ export default function IndexScreen({ navigation, route }) {
         isDarkModeOn && { backgroundColor: "black" },
       ]}
     >
-      <Text style={isDarkModeOn && { color: "white" }}>Index Screens</Text>
+      <Text style={[styles.container, isDarkModeOn && { color: "white" }]}>
+        Members Available Dates
+      </Text>
       <View style={styles.container}>
         <FlatList
           data={data}
@@ -201,9 +226,13 @@ export default function IndexScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightblue",
+    backgroundColor: "skyblue",
     alignItems: "center",
+    textAlign: "center",
     justifyContent: "center",
     width: "100%", // give the container full width
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "brown",
   },
 });

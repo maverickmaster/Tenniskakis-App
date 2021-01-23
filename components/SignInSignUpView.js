@@ -10,6 +10,7 @@ import {
   Keyboard,
   Platform,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -18,7 +19,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { signInAction } from "../redux/ducks/blogAuth";
 
-const API = "https://milton488.pythonanywhere.com";
+const API = "https://miltoncon.pythonanywhere.com";
 const API_LOGIN = "/auth";
 const API_SIGNUP = "/newuser";
 
@@ -30,79 +31,27 @@ export default function SignInSignUpView({ navigation, isSignIn }) {
     username,
     password,
     () => {
-      // setTimeout(() => {
       dispatch(signInAction());
-      // }, 500);
-      // navigation.navigate("TabStack"); // function to be run on successful login
-
-      // const [errorText, setErrorText] = useState("");
-      // const [loading, setLoading] = useState(false);
-
-      // async function signup() {
-      //   console.log("---- Signing up ----");
-      //   Keyboard.dismiss();
-
-      //   try {
-      //     setLoading(true);
-      //     const response = await axios.post(API + API_SIGNUP, {
-      //       username,
-      //       password,
-      //     });
-
-      //     if (response.data.Error === "User already exists") {
-      //       setErrorText("This user exists");
-      //       setLoading(false);
-      //       return;
-      //     }
-
-      //     console.log("Success signing up!");
-      //     login();
-      //   } catch (error) {
-      //     setLoading(false);
-      //     console.log("Error signing up!");
-      //     console.log(error.response);
-      //     setErrorText(error.response.data.description);
     }
   );
-  // }
-
-  // async function login() {
-  //   console.log("---- Login ----");
-  //   Keyboard.dismiss();
-
-  //   try {
-  //     setLoading(true);
-  //     const response = await axios.post(API + API_LOGIN, {
-  //       username,
-  //       password,
-  //     });
-  //     console.log("Success logging in!");
-  //     console.log(response);
-
-  //     await AsyncStorage.setItem("token", response.data.access_token);
-  //     setLoading(false);
-  //     navigation.navigate("Account");
-  //   } catch (error) {
-  //     setLoading(false);
-  //     console.log("Error logging in!");
-  //     console.log(error.response);
-
-  //     setErrorText(error.response.data.description);
-  //   }
-  // }
-
-  // function dismissKeyboard() {
-  //   if (Platform.OS !== "web") {
-  //     Keyboard.dismiss();
-  //   }
-  // }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Text style={styles.title}>
-          {isSignIn ? "Log in to blog" : "Sign up for an account"}
+        <Image
+          source={require("../assets/dateme.jpg")}
+          style={{
+            height: 168,
+            width: 168,
+            marginTop: 10,
+            borderRadius: 15,
+          }}
+        />
+        <Text style={styles.title}>{"DateME App"}</Text>
+        <Text style={styles.body}>
+          {isSignIn ? "Log in now" : "Account Sign up"}
         </Text>
+
         <Text style={styles.fieldTitle}>Username</Text>
         <TextInput
           style={styles.input}
@@ -111,6 +60,7 @@ export default function SignInSignUpView({ navigation, isSignIn }) {
           value={username}
           onChangeText={(input) => setUsername(input)}
         />
+
         <Text style={styles.fieldTitle}>Password</Text>
         <TextInput
           style={styles.input}
@@ -162,8 +112,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 24,
+    backgroundColor: "skyblue",
   },
   title: {
+    fontSize: 48,
+    fontWeight: "bold",
+    fontFamily: "ChalkboardSE-Bold",
+    marginBottom: 24,
+    color: "brown",
+  },
+  body: {
     fontSize: 36,
     fontWeight: "bold",
     marginBottom: 24,
@@ -200,5 +158,14 @@ const styles = StyleSheet.create({
   },
   switchText: {
     color: "blue",
+  },
+  Image: {
+    backgroundColor: "blue",
+    width: 120,
+    alignItems: "center",
+    padding: 18,
+    marginTop: 12,
+    marginBottom: 36,
+    borderRadius: 15,
   },
 });
