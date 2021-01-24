@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { signInAction } from "../redux/ducks/blogAuth";
 
-const API = "https://miltoncon.pythonanywhere.com";
+const API = "https://milton688.pythonanywhere.com";
 const API_LOGIN = "/auth";
 const API_SIGNUP = "/newuser";
 

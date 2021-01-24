@@ -56,7 +56,7 @@ export default function CreateScreen({ navigation }) {
     }
     // Error check if Date entered
     if (recContent == "") {
-      setErrorMessage("Please enter an available date.");
+      setErrorMessage("Please enter an available date for a meetup.");
       return;
     }
     // Error check if Age entered
@@ -96,7 +96,7 @@ export default function CreateScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={commonStyles.container}>
-        <Text style={styles.textLabel}>Date Available</Text>
+        <Text style={styles.textLabel}>Create Date Event</Text>
         <Text style={styles.textLabel2}>Name</Text>
         <TextInput
           placeholder="Enter Name..."
@@ -106,9 +106,9 @@ export default function CreateScreen({ navigation }) {
           onTextInput={() => setErrorMessage("")}
           autoCorrect={false}
         ></TextInput>
-        <Text style={styles.textLabel2}>Date</Text>
+        <Text style={styles.textLabel2}>Date, Time and Event </Text>
         <TextInput
-          placeholder="Enter available date..."
+          placeholder="Suggest an event and date for a meet up..."
           style={styles.textInput}
           value={content}
           onChangeText={(input) => setContent(input)}

@@ -125,7 +125,7 @@ export default function IndexScreen({ navigation, route }) {
   // Delete button pressed
   function deletePressed(recID) {
     console.log("--- Deleting! ---");
-    // Here need to add delete blog
+    // Here need to add delete Post
     deletePosts(recID);
     return navigation.navigate("Index");
   }
@@ -135,7 +135,7 @@ export default function IndexScreen({ navigation, route }) {
   function renderPost({ item }) {
     return (
       <Card style={styles.card}>
-        <CardItem style={{ backgroundColor: "orange" }}>
+        <CardItem style={{ backgroundColor: "violet" }}>
           <Body style={{ flexDirection: "row", alignItems: "center" }}>
             <View
               style={{
@@ -146,7 +146,7 @@ export default function IndexScreen({ navigation, route }) {
               }}
             >
               <TouchableOpacity onPress={() => deletePressed(item.id)}>
-                <MaterialIcons name="highlight-remove" size={40} color="red" />
+                <Ionicons name="remove-circle-outline" size={40} color="red" />
               </TouchableOpacity>
             </View>
             <View style={{ width: "80%", flexDirection: "column" }}>
@@ -156,7 +156,7 @@ export default function IndexScreen({ navigation, route }) {
                   {item.content}
                 </Text>
 
-                <Text style={{ color: "white" }} numberOfLines={1}>
+                {/* <Text style={{ color: "white" }} numberOfLines={1}>
                   {item.age}
                 </Text>
                 <Text style={{ color: "white" }} numberOfLines={1}>
@@ -164,7 +164,7 @@ export default function IndexScreen({ navigation, route }) {
                 </Text>
                 <Text style={{ color: "white" }} numberOfLines={1}>
                   {item.email}
-                </Text>
+                </Text> */}
               </TouchableOpacity>
             </View>
             <View

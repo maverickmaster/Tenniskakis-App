@@ -25,3 +25,5 @@ export default function blogAuthReducer(state = initialState, action) {
       return state;
   }
 }
+
+//using the blog authentication for signIn functions

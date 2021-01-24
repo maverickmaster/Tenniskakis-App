@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     color: "brown",
-    marginBottom: 88,
+    marginBottom: 108,
   },
   usernameText: {
     fontSize: 48,

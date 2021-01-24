@@ -6,7 +6,7 @@ const API_WHOAMI = "/whoami";
 const API_LOGIN = "/auth";
 const API_SIGNUP = "/newuser";
 
-export const API = "https://miltoncon.pythonanywhere.com";
+export const API = "https://milton688.pythonanywhere.com";
 export const API_ALL_POSTS = "/posts"; // GET
 export const API_DELETE_POST_ID = "/posts/"; // DELETE
 export const API_CREATE_POST = "/create"; // POST
