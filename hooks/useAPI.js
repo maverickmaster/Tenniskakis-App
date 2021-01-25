@@ -58,9 +58,6 @@ export function useAuth(username, password, navigationCallback) {
       setLoading(true);
       const response = await axios.post(API + API_LOGIN, {
         username,
-        // age, //add 1
-        // career,
-        // email,
         password,
       });
       console.log("Success signing in!");
@@ -80,11 +77,8 @@ export function useAuth(username, password, navigationCallback) {
 
     try {
       setLoading(true);
-      await axios.post(API + API_SIGNUP, {
+      const response = await axios.post(API + API_SIGNUP, {
         username,
-        // age, // add2
-        // career,
-        // email,
         password,
       });
       if (response.data.Error === "User already exists") {
