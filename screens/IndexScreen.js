@@ -206,7 +206,7 @@ export default function IndexScreen({ navigation, route }) {
         isDarkModeOn && { backgroundColor: "black" },
       ]}
     >
-      <Text style={[styles.container, isDarkModeOn && { color: "white" }]}>
+      <Text style={[styles.text, isDarkModeOn && { color: "white" }]}>
         Members Available Dates
       </Text>
       <View style={styles.container}>
@@ -224,15 +224,24 @@ export default function IndexScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "brown",
+  },
   container: {
     flex: 1,
     backgroundColor: "skyblue",
-    alignItems: "center",
+    // alignItems: "center",
     textAlign: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     width: "100%", // give the container full width
     fontSize: 28,
     fontWeight: "bold",
     color: "brown",
+  },
+  card: {
+    flex: 1,
+    width: "100%",
   },
 });
