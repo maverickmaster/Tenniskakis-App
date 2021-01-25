@@ -77,7 +77,7 @@ export function useAuth(username, password, navigationCallback) {
 
     try {
       setLoading(true);
-      const response = await axios.post(API + API_SIGNUP, {
+      response = await axios.post(API + API_SIGNUP, {
         username,
         password,
       });
