@@ -87,10 +87,10 @@ export default function ShowScreen({ navigation, route }) {
         <CardItem>
           <Body>
             <Text style={styles.cardTitle}>{title}</Text>
+            <Text style={styles.cardBody}>{age}</Text>
+            <Text style={styles.cardBody}>{career}</Text>
+            <Text style={styles.cardBody}>{email}</Text>
             <Text>{content}</Text>
-            <Text>{age}</Text>
-            <Text>{career}</Text>
-            <Text>{email}</Text>
           </Body>
         </CardItem>
       </Card>
@@ -137,8 +137,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "blue",
     fontWeight: "bold",
-    marginBottom: 12,
+    marginBottom: 8,
   },
+  cardBody: {
+    fontSize: 16,
+    color: "black",
+    fontWeight: "bold",
+    marginBottom: 3,
+  },
+
   card: {
     flex: 1,
     width: "90%",
