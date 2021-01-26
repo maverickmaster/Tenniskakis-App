@@ -26,6 +26,7 @@ export default function CreateScreen({ navigation }) {
   // Create posts to DB
   async function createPost(title, content, age, career, email) {
     console.log("--- Post creating ---");
+    var success = true;
 
     try {
       setLoading(true);
@@ -42,13 +43,21 @@ export default function CreateScreen({ navigation }) {
     } catch (error) {
       console.log("Error retriving posts!");
       console.log(error.response.data.error);
+      success = false;
     } finally {
       setLoading(false);
+      return success;
     }
   }
 
   // Create button pressed
-  function createPressed(recTitle, recContent, recAge, recCareer, recEmail) {
+  async function createPressed(
+    recTitle,
+    recContent,
+    recAge,
+    recCareer,
+    recEmail
+  ) {
     // Error check if Name entered
     if (recTitle == "") {
       setErrorMessage("Please enter Name.");
@@ -76,16 +85,26 @@ export default function CreateScreen({ navigation }) {
     }
 
     // Create post
-    createPost(recTitle, recContent, recAge, recCareer, recEmail);
+    const didCreatePost = await createPost(
+      recTitle,
+      recContent,
+      recAge,
+      recCareer,
+      recEmail
+    );
 
-    navigation.navigate("Index", {
-      title,
-      content,
-      age,
-      career,
-      email,
-      action: "create",
-    });
+    if (didCreatePost) {
+      navigation.navigate("Index", {
+        title,
+        content,
+        age,
+        career,
+        email,
+        action: "create",
+      });
+    } else {
+      alert("Error creating post");
+    }
   }
 
   // Cancel button pressed
