@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pcmob5-project1",
-    "slug": "pcmob5-project1",
+    "name": "pcmob7-DateMeApp",
+    "slug": "pcmob7-DateMeApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,9 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
